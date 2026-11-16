@@ -1,0 +1,727 @@
+:root{
+    --main-color: rgb(48, 137, 179);   
+    --night: rgb(11, 16, 26);            
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;  /*'Cormorant Garamond', serif;*/
+    box-sizing: border-box;
+    color: white;
+}
+
+html{
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 10vh;
+}
+
+body{
+    width: 100%;
+    min-height: 100vh;
+    background: var(--night)
+}
+
+/* ---------- NAV ---------- */
+nav{
+    position: fixed;      
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10vh;
+    z-index: 200;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);   /* the thin line under the nav */
+    transition: background-color 0.3s linear;
+}
+
+nav.scrolled{
+    background: rgba(13,16,32,0.92);
+}
+
+.nav-container{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;   /* logo | links | empty */
+    align-items: center;
+    padding: 0 5%;
+}
+
+.logo{
+    justify-self: start;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+.nav-container .links{
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
+
+.nav-container .links a{
+    position: relative;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s linear;
+}
+
+.nav-container .links a::before{
+    position: absolute;
+    content: "";
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--main-color);
+    transition: 0.2s linear;
+}
+
+.nav-container .links a:hover::before{
+    width: 100%; 
+}
+
+.nav-container .links a:hover{ 
+    color: var(--main-color); 
+}
+
+.menu-toggle{
+    display: none;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-toggle i{
+    font-size: 1.5rem;
+    color: white;
+    transition: color 0.2s linear;
+}
+
+.menu-toggle:hover i{
+    color: var(--main-color);
+}
+
+@media (max-width: 700px) {
+    .menu-toggle{
+        display: block;
+    }
+
+    .nav-container .links{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 0 1rem;
+        background: rgba(13,16,32,0.97);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    }
+
+    nav.menu-open .links{
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    /* AOS hides elements until they scroll into view, which would keep the
+       links invisible and unclickable inside the closed menu, so override it */
+    .nav-container .link{
+        width: 100%;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+    }
+
+    .nav-container .links a{
+        display: block;
+        padding: 0.9rem 0;
+        font-size: 0.9rem;
+        letter-spacing: 0.12em;
+        text-align: center;
+    }
+
+    /* the underline animation doesn't suit a full-width row */
+    .nav-container .links a::before{
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .nav-container .logo{
+        font-size: 1.4rem;
+    }
+}
+
+/* ---------- SECTIONS ---------- */
+section{
+    width: 100%;
+    min-height: 90vh;
+    padding: 80px 8%;
+}
+
+.section-title{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.section-title span{
+    color: var(--main-color);
+    text-shadow: 0 0 10px var(--main-color);
+}
+
+/* ---------- HOME ---------- */
+#home{
+    position: relative;
+    height: 100vh;
+    padding: 10vh 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    background: radial-gradient(ellipse at bottom, rgb(11, 16, 26) 0%, var(--night) 100%);
+}
+
+#stars{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-content{
+    position: relative;   /* lifts the text above the canvas */
+    z-index: 1;
+    color: white;
+    padding: 0 20px;
+}
+
+.hero-content h1{
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.hero-content h1 span{
+    color: var(--main-color);
+    text-shadow: 0 0 20px var(--main-color);
+}
+
+.typewriter{
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.typewriter span{
+    color: var(--main-color);
+    position: relative;
+}
+
+.typewriter span::after{
+    content: "";
+    position: absolute;
+    bottom: 5px;
+    width: 0.6em;
+    height: 100%;
+    margin-left: 4px;
+    border-bottom: 4px solid var(--main-color);
+    animation: cursor 0.8s steps(1) infinite;
+}
+
+@keyframes cursor {
+    50%{
+        border-bottom-color: transparent;
+    }
+}
+
+#home .social-links{
+    margin-top: 30px;
+}
+
+/* ---------- SOCIAL ICONS ---------- */
+.social-links i{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: transparent;
+    border: 0.2rem solid var(--main-color);
+    border-radius: 50%;
+    color: var(--main-color);
+    margin: 5px 10px;
+    font-size: 1.5rem;
+    transition: 0.2s linear;
+}
+
+.social-links i:hover{
+    color: var(--night);
+    background-color: var(--main-color);
+}
+
+#home .social-links i:hover,
+footer .social-links i:hover{
+    background-color: var(--main-color);
+    color: var(--night);
+}
+
+/* ---------- BUTTON ---------- */
+.btn-main{
+    display: inline-block;
+    padding: 10px 28px;
+    background-color: var(--main-color);
+    color: var(--night);
+    border: 2px solid var(--main-color);
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.2s linear;
+}
+
+.btn-main:hover{
+    background-color: transparent;
+    color: var(--main-color);
+}
+
+/* ---------- ABOUT ---------- */
+#about{
+    min-height: auto;
+    padding-bottom: 20px;
+}
+
+.about-block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-image{
+    flex: 0 0 40%;
+}
+
+.about-image img{
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.about-text{
+    flex: 1;
+    line-height: 1.7;
+}
+
+.about-text p{
+    margin-bottom: 1.2rem;
+}
+
+/* ---------- SKILLS ---------- */
+#skills{
+    position: relative;
+    min-height: auto;
+    padding-top: 50px;
+}
+
+.constellations{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.constellation{
+    width: 100%;
+    max-width: 560px;
+    justify-self: center;
+    padding: 1.5rem 1.5rem 1rem;
+    border: 1px solid rgba(48, 137, 179, 0.35);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 50% 120%, rgba(48, 137, 179, 0.18), transparent 60%),
+        rgba(255, 255, 255, 0.03);
+}
+
+.constellation-head{
+    display: grid;
+    gap: 0.2rem;
+}
+
+.constellation-tag{
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--main-color);
+}
+
+.constellation-head h3{
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.constellation-head p{
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.sky{
+    position: relative;
+    aspect-ratio: 3 / 2;
+    margin: 0.5rem 1.5rem 1.5rem;   /* room so edge stars and their names don't get cut off */
+}
+
+.sky svg{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.sky line{
+    stroke: rgba(150, 200, 230, 0.45);
+    stroke-width: 0.4;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;            /* hidden until the sky is "drawn" */
+    transition: stroke-dashoffset 1.2s ease var(--d, 0s), stroke 0.3s linear;
+}
+
+.sky.drawn line{
+    stroke-dashoffset: 0;
+}
+
+.sky line.lit{
+    stroke: rgb(140, 215, 255);
+    filter: drop-shadow(0 0 1px rgb(140, 215, 255));
+}
+
+.skill-star{
+    position: absolute;
+    transform: translate(-50%, -50%);   /* the x / y point is the center of the orb */
+    outline: none;
+    cursor: default;
+    animation: star-twinkle 3.5s ease-in-out infinite;
+}
+
+.skill-star .orb{
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(48, 137, 179, 0.35) 0%, rgba(11, 16, 26, 0.9) 70%);
+    border: 1px solid rgba(140, 215, 255, 0.5);
+    box-shadow: 0 0 14px rgba(48, 137, 179, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.skill-star i{
+    font-size: 1.6rem;
+    color: rgb(170, 220, 245);
+    transition: color 0.3s ease;
+}
+
+.skill-star .name{
+    position: absolute;              /* out of the layout, so lines hit the orb's center */
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.75);
+    transition: color 0.3s ease;
+}
+
+.skill-star:hover,
+.skill-star:focus-visible{
+    animation-play-state: paused;
+    z-index: 2;
+}
+
+.skill-star:hover .orb,
+.skill-star:focus-visible .orb{
+    transform: scale(1.18);
+    border-color: white;
+    box-shadow: 0 0 28px rgb(48, 137, 179), 0 0 60px rgba(48, 137, 179, 0.5);
+}
+
+.skill-star:hover i,
+.skill-star:focus-visible i,
+.skill-star:hover .name,
+.skill-star:focus-visible .name{
+    color: white;
+}
+
+@keyframes star-twinkle{
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.7; }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .skill-star{ animation: none; }
+    .sky line{ transition: none; }
+}
+
+@media (max-width: 500px){
+    .constellation{
+        padding: 1.2rem 1rem 0.5rem;
+    }
+
+    .sky{
+        aspect-ratio: 1 / 1;        /* taller on phones so the stars have room */
+        margin: 0.5rem 1rem 1.5rem;
+    }
+
+    .skill-star .orb{
+        width: 46px;
+        height: 46px;
+    }
+
+    .skill-star i{
+        font-size: 1.3rem;
+    }
+}
+
+/* ---------- PROJECTS ---------- */
+.projects-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.project-card{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+    transition: 0.2s linear;
+}
+
+.project-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px var(--main-color);
+}
+
+.project-card img{
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.project-card .tech{
+    color: var(--main-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.project-links{
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.2rem;
+}
+
+.project-card a{
+    color: var(--main-color);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.project-card a:hover{
+    text-decoration: underline;
+}
+
+/* ---------- CONTACT ---------- */
+#contact{
+    position: relative;
+    min-height: auto;
+    padding-bottom: 100px;
+}
+
+.contact-card{
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid var(--main-color);
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(48,137,179,0.25);
+}
+
+.contact-card h3{
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+}
+
+.contact-status{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--main-color);
+}
+
+.dot{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse{
+    0%   { box-shadow: 0 0 0 0 rgba(74,222,128,0.6); }
+    100% { box-shadow: 0 0 0 10px rgba(74,222,128,0); }
+}
+
+.contact-actions{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-outline{
+    padding: 10px 28px;
+    background: transparent;
+    color: var(--main-color);
+    border: 2px solid var(--main-color);
+    border-radius: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.btn-outline:hover{
+    background: var(--main-color);
+    color: var(--night);
+}
+
+.deco-star{
+    position: absolute;
+    color: var(--main-color);
+    pointer-events: none;
+}
+
+.star-1{top: 30px; right: 6%;  font-size: 1.2rem;}
+.star-2{top: 70px; right: 11%; font-size: 0.6rem;}
+.star-3{bottom: 90px; left: 11%; font-size: 0.8rem;}
+.star-4{bottom: 130px; left: 6%; font-size: 1rem;}
+.star-5{top: 50px; left: 5%; font-size: 0.8rem;}
+.star-6{bottom: 40px; right: 6%; font-size: 1.1rem;}
+
+
+/* ---------- FOOTER ---------- */
+footer{
+    background: var(--night);
+    padding: 20px 8%;
+    border-top: 1px solid rgba(48, 137, 179, 0.4);
+}
+
+.footer-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.85rem;
+}
+
+.footer-bottom a{
+    text-decoration: none;
+    transition: color 0.2s linear;
+}
+
+.footer-bottom a:hover{
+    color: var(--main-color);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 884px) {
+    .nav-container{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 4%;
+    }
+
+    .nav-container .links{
+        gap: 1.5rem;
+    }
+
+    .nav-container .logo{
+        font-size: 1.8rem;
+    }
+
+    .about-block{
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .about-image{
+        flex: none;
+        width: 70%;
+    }
+
+    .social-links i{
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.5rem;
+    }
+
+    .footer-bottom{
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 500px) {
+    .nav-container .logo{
+        font-size: 1.4rem;
+        /*display: none;   nese bahen duq n 375px wide*/
+    }
+
+    .nav-container .links{
+        gap: 0.6rem;
+    }
+
+    .nav-container .links a{
+        font-size: 0.6rem;
+        letter-spacing: 0.03em;
+    }
+}
