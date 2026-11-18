@@ -6,7 +6,7 @@
 *{
     padding: 0;
     margin: 0;
-    font-family: 'Poppins', sans-serif;  /*'Cormorant Garamond', serif;*/
+    font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
     color: white;
 }
@@ -20,10 +20,9 @@ html{
 body{
     width: 100%;
     min-height: 100vh;
-    background: var(--night)
+    background: var(--night);
 }
 
-/* ---------- NAV ---------- */
 nav{
     position: fixed;      
     top: 0;
@@ -32,7 +31,7 @@ nav{
     height: 10vh;
     z-index: 200;
     background: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);   /* the thin line under the nav */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     transition: background-color 0.3s linear;
 }
 
@@ -44,7 +43,7 @@ nav.scrolled{
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr auto 1fr;   /* logo | links | empty */
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     padding: 0 5%;
 }
@@ -112,63 +111,7 @@ nav.scrolled{
     color: var(--main-color);
 }
 
-@media (max-width: 700px) {
-    .menu-toggle{
-        display: block;
-    }
-
-    .nav-container .links{
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        flex-direction: column;
-        gap: 0;
-        padding: 0.5rem 0 1rem;
-        background: rgba(13,16,32,0.97);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-10px);
-        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
-    }
-
-    nav.menu-open .links{
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-    }
-
-    /* AOS hides elements until they scroll into view, which would keep the
-       links invisible and unclickable inside the closed menu, so override it */
-    .nav-container .link{
-        width: 100%;
-        opacity: 1 !important;
-        transform: none !important;
-        pointer-events: auto !important;
-    }
-
-    .nav-container .links a{
-        display: block;
-        padding: 0.9rem 0;
-        font-size: 0.9rem;
-        letter-spacing: 0.12em;
-        text-align: center;
-    }
-
-    /* the underline animation doesn't suit a full-width row */
-    .nav-container .links a::before{
-        display: none;
-    }
-}
-
-@media (max-width: 500px) {
-    .nav-container .logo{
-        font-size: 1.4rem;
-    }
-}
-
-/* ---------- SECTIONS ---------- */
+/* Sections */
 section{
     width: 100%;
     min-height: 90vh;
@@ -186,7 +129,7 @@ section{
     text-shadow: 0 0 10px var(--main-color);
 }
 
-/* ---------- HOME ---------- */
+/* Home Section */
 #home{
     position: relative;
     height: 100vh;
@@ -256,7 +199,6 @@ section{
     margin-top: 30px;
 }
 
-/* ---------- SOCIAL ICONS ---------- */
 .social-links i{
     display: inline-flex;
     justify-content: center;
@@ -277,13 +219,6 @@ section{
     background-color: var(--main-color);
 }
 
-#home .social-links i:hover,
-footer .social-links i:hover{
-    background-color: var(--main-color);
-    color: var(--night);
-}
-
-/* ---------- BUTTON ---------- */
 .btn-main{
     display: inline-block;
     padding: 10px 28px;
@@ -301,7 +236,7 @@ footer .social-links i:hover{
     color: var(--main-color);
 }
 
-/* ---------- ABOUT ---------- */
+/* About Section */
 #about{
     min-height: auto;
     padding-bottom: 20px;
@@ -335,7 +270,7 @@ footer .social-links i:hover{
     margin-bottom: 1.2rem;
 }
 
-/* ---------- SKILLS ---------- */
+/* Skills Section */
 #skills{
     position: relative;
     min-height: auto;
@@ -482,32 +417,7 @@ footer .social-links i:hover{
     50%      { opacity: 0.7; }
 }
 
-@media (prefers-reduced-motion: reduce){
-    .skill-star{ animation: none; }
-    .sky line{ transition: none; }
-}
-
-@media (max-width: 500px){
-    .constellation{
-        padding: 1.2rem 1rem 0.5rem;
-    }
-
-    .sky{
-        aspect-ratio: 1 / 1;        /* taller on phones so the stars have room */
-        margin: 0.5rem 1rem 1.5rem;
-    }
-
-    .skill-star .orb{
-        width: 46px;
-        height: 46px;
-    }
-
-    .skill-star i{
-        font-size: 1.3rem;
-    }
-}
-
-/* ---------- PROJECTS ---------- */
+/* Projects Section */
 .projects-grid{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -562,7 +472,7 @@ footer .social-links i:hover{
     text-decoration: underline;
 }
 
-/* ---------- CONTACT ---------- */
+/* Contact Section */
 #contact{
     position: relative;
     min-height: auto;
@@ -642,11 +552,8 @@ footer .social-links i:hover{
 .star-2{top: 70px; right: 11%; font-size: 0.6rem;}
 .star-3{bottom: 90px; left: 11%; font-size: 0.8rem;}
 .star-4{bottom: 130px; left: 6%; font-size: 1rem;}
-.star-5{top: 50px; left: 5%; font-size: 0.8rem;}
-.star-6{bottom: 40px; right: 6%; font-size: 1.1rem;}
 
-
-/* ---------- FOOTER ---------- */
+/* Footer */
 footer{
     background: var(--night);
     padding: 20px 8%;
@@ -671,57 +578,158 @@ footer{
     color: var(--main-color);
 }
 
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 884px) {
+@media (max-width: 884px){
+    /* nav: switch from the 3-column grid to a simple row */
     .nav-container{
         display: flex;
         justify-content: space-between;
         padding: 0 4%;
     }
-
+ 
     .nav-container .links{
         gap: 1.5rem;
     }
-
+ 
     .nav-container .logo{
         font-size: 1.8rem;
     }
-
+ 
+    /* about: stack the photo above the text */
     .about-block{
         flex-direction: column;
         text-align: center;
         gap: 2rem;
     }
-
+ 
     .about-image{
         flex: none;
         width: 70%;
     }
-
+ 
     .social-links i{
         width: 2.5rem;
         height: 2.5rem;
-        font-size: 1.5rem;
     }
-
+ 
     .footer-bottom{
         justify-content: center;
         text-align: center;
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 800px){
+
+    /* top stars: in the padding above the title */
+    .star-1{ top: 20px; right: 6%; }
+    .star-2{ top: 42px; right: 12%; }
+
+    /* bottom stars: in the padding below the card */
+    .star-3{ bottom: 25px; left: 11%; }
+    .star-4{ bottom: 55px; left: 6%; }
+}
+
+@media (max-width: 700px){
+ 
+    .menu-toggle{
+        display: block;
+    }
+ 
+    /* the links become a dropdown under the nav bar */
+    .nav-container .links{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 0 1rem;
+        background: rgba(13, 16, 32, 0.97);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    }
+ 
+    nav.menu-open .links{
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+ 
+    /* AOS hides elements until they scroll into view, which would keep the
+       links invisible and unclickable inside the closed menu, so override it */
+    .nav-container .link{
+        width: 100%;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+    }
+ 
+    .nav-container .links a{
+        display: block;
+        padding: 0.9rem 0;
+        font-size: 0.9rem;
+        letter-spacing: 0.12em;
+        text-align: center;
+    }
+ 
+    /* the underline animation doesn't suit a full-width row */
+    .nav-container .links a::before{
+        display: none;
+    }
+}
+ 
+@media (max-width: 500px){
+ 
     .nav-container .logo{
         font-size: 1.4rem;
-        /*display: none;   nese bahen duq n 375px wide*/
     }
-
-    .nav-container .links{
-        gap: 0.6rem;
+ 
+    section{
+        padding: 60px 6%;
     }
-
-    .nav-container .links a{
-        font-size: 0.6rem;
-        letter-spacing: 0.03em;
+ 
+    /* skills: taller sky so the stars have room */
+    .constellation{
+        padding: 1.2rem 1rem 0.5rem;
     }
+ 
+    .sky{
+        aspect-ratio: 1 / 1;
+        margin: 0.5rem 1rem 1.5rem;
+    }
+ 
+    .skill-star .orb{
+        width: 46px;
+        height: 46px;
+    }
+ 
+    .skill-star i{
+        font-size: 1.3rem;
+    }
+ 
+    .skill-star .name{
+        font-size: 0.7rem;
+    }
+ 
+    /* contact: tighter card */
+    .contact-card{
+        padding: 2rem 1.25rem;
+    }
+}
+ 
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce){
+   html{ scroll-behavior: auto; }
+    [data-aos]{
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        pointer-events: auto !important;
+    }
+    .skill-star{ animation: none; }
+    .sky line{ transition: none; }
+    .typewriter span::after{ animation: none; }   /* blinking cursor */
+    .dot{ animation: none; }                      /* pulsing "open to opportunities" dot */
 }

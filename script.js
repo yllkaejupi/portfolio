@@ -1,3 +1,6 @@
+// true if the visitor asked their device to cut down on motion
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
 // ---------- Nav: transparent at the top, dark once you scroll ----------
 const nav = document.querySelector("nav")
 
@@ -32,6 +35,9 @@ function createStars(){
             offset: Math.random() * Math.PI * 2       // so they don't all twinkle together
         })
     }
+
+    if(reduceMotion) drawStars(0)     // with reduced motion there is no animation loop, so paint the stars once
+
 }
 
 function drawStars(time){
@@ -48,11 +54,13 @@ function drawStars(time){
         ctx.fill()
     })
 
-    animationId = requestAnimationFrame(drawStars)   // keep the id so we can cancel it
+    if(!reduceMotion){
+        animationId = requestAnimationFrame(drawStars)   // keep the id so we can cancel it
+    }
 }
 
 function startStars(){
-    if(animationId === null){
+    if(!reduceMotion && animationId === null){
         animationId = requestAnimationFrame(drawStars)
     }
 }
@@ -111,9 +119,11 @@ function typeRole(){
     }
 
     setTimeout(typeRole, delay)
-}
+}    
 
-setTimeout(typeRole, 1500)   // let "Developer" show for a moment first
+if(!reduceMotion){
+    setTimeout(typeRole, 1500)   // let "Developer" show for a moment first
+}
 
 // ---------- Nav: mobile menu ----------
 const menuToggle = document.querySelector("#menu-toggle")
@@ -166,7 +176,7 @@ const projects = [
         tech: "HTML · CSS · JS",
         description: "A recipe discovery website currently in development. So far it has a responsive layout with a hero search, category browsing, popular recipes and a seasonal section, plus a mobile navigation menu. Next up: recipe data, search, favorites, collections and a grocery list.",
         links: [
-            { label: "View Project", url: "https://github.com/yllkaejupi/forkd.git" }
+            { label: "View Project", url: "https://github.com/yllkaejupi/forkd" }
         ],
         image: "images/forkd.png"
     },
@@ -214,14 +224,15 @@ projects.forEach(function(project){
     projectsGrid.appendChild(card)
 })
 
-AOS.refreshHard()
-
 const copyBtn = document.querySelector("#copy-email")
 
 copyBtn.addEventListener("click", function(){
-    navigator.clipboard.writeText("yllkaejupi123@gmail.com")
-    copyBtn.textContent = "Copied!"
-    setTimeout(function(){ copyBtn.textContent = "Copy email" }, 2000)
+    navigator.clipboard.writeText("yllkaejupi123@gmail.com").then(function(){
+        copyBtn.textContent = "Copied!"
+        setTimeout(function(){ copyBtn.textContent = "Copy email" }, 2000)
+    }).catch(function(){
+        copyBtn.textContent = "Copy failed"
+    })
 })
 
 // ---------- Skills: constellations ----------

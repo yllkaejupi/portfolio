@@ -19,76 +19,92 @@
         <nav>
             <div class="nav-container">
                 <a href="#home" class="logo" data-aos="zoom-in" data-aos-duration="1000">Yllka</a>
-                <div class="links">
+
+                <div class="links" id="nav-links">
                     <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100"><a href="#home">Home</a></div>
                     <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="#about">About</a></div>
                     <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300"><a href="#skills">Skills</a></div>
                     <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="#projects">Projects</a></div>
                     <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500"><a href="#contact">Contact</a></div>
                 </div>
+
                 <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
                     <i class="fa-solid fa-bars"></i>
                 </button>
+
             </div>
         </nav>
 
-        <!-- HOME -->
         <section id="home">
             <canvas id="stars" aria-hidden="true"></canvas>
+
             <div class="hero-content">
                 <h1 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Hey I'm <span>Yllka</span></h1>
+
                 <div class="typewriter" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">I'm a <span>Developer</span></div>
                 
                 <div class="social-links" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
-                    <a href="" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
-                    <a href="" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+                    <a href="https://github.com/yllkaejupi" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                    <a href="https://www.linkedin.com/in/yllka-ejupi-250242391/" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
                 </div>
+
             </div>
         </section>
 
-        <!-- ABOUT -->
         <section id="about">
             <h2 class="section-title" data-aos="fade-up">About <span>Me</span></h2>
             <div class="about-block">
+
                 <div class="about-image" data-aos="fade-up" data-aos-duration="1000">
-                    <img src="images/mypic3.jpg" alt="Photo of Yllka">
+                    <img src="images/mypic.jpg" alt="Photo of Yllka">
                 </div>
+
                 <div class="about-text" data-aos="fade-up" data-aos-duration="1000">
                     <p> I’m a Computer Science graduate and I love turning ideas into things that actually work. I started out with Java and data analysis, and gradually developed an interest in web development. Through academic and personal projects, I've built a foundation in programming, problem-solving, and collaborative work. 
                         I like picking up new tools along the way and I'm looking forward to gaining professional experience, taking on new challenges, and growing as a developer.</p>
                     <p> Fun fact: Yllka means "star" in Albanian, so you'll find a few of them around here.</p>
                     <a href="files/cv.pdf" download class="btn-main">Download CV</a>
                 </div>
+
             </div>
         </section>
 
-        <!-- SKILLS (constellations are drawn by script.js) -->
         <section id="skills">
             <h2 class="section-title" data-aos="fade-up">My <span>Skills</span></h2>
-            <div class="constellations" id="constellations"></div>
+
+            <div class="constellations" id="constellations">
+                <!-- Constellations are drawn by script.js -->
+            </div>
+
         </section>
 
-        <!-- PROJECTS (cards are filled in by script.js) -->
         <section id="projects">
             <h2 class="section-title" data-aos="fade-up">My <span>Projects</span></h2>
-            <div class="projects-grid" id="projects-grid"></div>
+
+            <div class="projects-grid" id="projects-grid">
+                <!-- Project cards are filled in by script.js -->
+            </div>
+
         </section>
 
-        <!-- CONTACT -->
         <section id="contact">
             <h2 class="section-title" data-aos="fade-up">Get in <span>Touch</span></h2>
             <div class="contact-card" data-aos="fade-up">
+
                 <p class="contact-status"><span class="dot"></span> Open to opportunities</p>
                 <h3>Let's build something together.</h3>
                 <p>Have a project, an internship, or just an idea? My inbox is always open.</p>
+                
                 <div class="contact-actions">
                     <a class="btn-main" href="mailto:yllkaejupi123@gmail.com">Say Hi</a>
                     <button class="btn-outline" id="copy-email">Copy email</button>
                 </div>
+                
                 <div class="social-links">
-                    <a href="https://github.com/yllkaejupi"><i class="fa-brands fa-github"></i></a>
-                    <a href="YOUR-LINKEDIN-URL"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/yllkaejupi" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/yllka-ejupi-250242391/" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
                 </div>
+
             </div>
             <i class="fa-solid fa-star deco-star star-1" aria-hidden="true"></i>
             <i class="fa-solid fa-star deco-star star-2" aria-hidden="true"></i>
@@ -96,7 +112,6 @@
             <i class="fa-regular fa-star deco-star star-4" aria-hidden="true"></i>
         </section>
 
-        <!-- FOOTER -->
         <footer>
             <div class="footer-bottom">
                 <span>© 2026 Yllka Ejupi</span>
@@ -107,7 +122,8 @@
 
         <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
         <script>
-            AOS.init({offset:0});
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            AOS.init({ offset: 0, disable: prefersReducedMotion })
         </script>
         <script src="script.js"></script>
     </body>
